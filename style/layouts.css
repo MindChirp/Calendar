@@ -1,0 +1,10 @@
+#divider-wide {
+    width: 100%;
+    height: 1px;
+    background-color: rgb(240,240,240);
+}
+
+#search-menu-container .content-from-search-bar-divider {
+    margin-top: 5px;
+    height: 1px;
+}

@@ -1,0 +1,481 @@
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    font-family: Product Sans;
+    cursor: default;
+    user-select: none;
+}
+html {
+    height: 100%;
+    width: 100%;
+}
+
+@font-face {
+    font-family: 'Product Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Open Sans'), local('OpenSans'), url(https://fonts.gstatic.com/s/productsans/v5/HYvgU2fE2nRJvZ5JFAumwegdm0LZdjqr5-oayXSOefg.woff2) format('woff2');
+  }
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  display: none;
+}
+
+#content #header {
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    z-index: 2;
+    box-shadow: 0px -18px 49px 0px rgba(0, 0, 0, 0.75);
+    grid-area: 1 / 2 / span 1 / span 2
+}
+
+#content {
+    height: 100%;
+    width: 100%;
+    display: grid; 
+    grid-template-columns: 250px auto;
+    grid-template-rows: 70px auto;
+    overflow: hidden;
+}
+
+#content #sidebar {
+    height: 100%;
+    width: 100%;
+    opacity: 1;
+    grid-area: 1 / 1 / span 2 / 1;
+}
+
+#content #sidebar #overlay {
+    background-color: rgb(20, 92, 200);
+    z-index: 3;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    opacity: 0.5;
+}
+
+#content #background-image {
+    background-image: url("../data/assets/images/shoreline.jpg");
+    filter: blur(3px);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    width: 250px;
+    position: absolute;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 1;
+    background-position-x: 20%;
+}
+
+#input-container {
+    height: 100%;
+    width: fit-content;
+    margin-left: 30px;
+}
+
+#input-container #search-box-main {
+    height: 45px;
+    width: 400px;
+    margin-top: 35px;
+    outline: none;
+    transform: translateY(-50%);
+    border-radius: 100px;
+    border-style: none;
+    font-size: 20px;
+    background-color: rgb(240,240,240);
+    transition: 200ms all ease-in-out;
+    font-size: 25px;
+    padding: 0 10px 0 10px;
+    font-family: Product Sans;
+
+}
+
+#input-container #search-box-main:focus {
+    background-color: white;
+}
+
+#search-menu-container {
+    height: fit-content;
+    width: 380px;
+    min-height: fit-content;
+    padding: 0 10px 0;
+    max-width: 400px;
+    overflow: hidden;
+    position: absolute;
+    top: 12.5px;
+    transform: translateX(30px);
+    border-radius: 20px;
+    background-color: white;
+    box-shadow: 0px 7px 17px -3px rgba(0, 0, 0, 0.43);
+    transition: all 300ms ease-in-out;
+}
+
+#search-menu-container #search-box-secondary {
+    width: 100%;
+    height: 20px;
+    border-radius: 20px;
+    border-style: none;
+    background-color: transparent;
+    outline: none;
+    padding: 0 10px 0 10px;
+    margin-top: 5px;
+    font-size: 15px;
+    font-family: Product Sans;
+
+}
+
+#search-menu-container #suggestion-text {
+    margin: 0px 0 10px 10px;
+    font-family: Product Sans;
+
+}
+
+#search-menu-container #suggestion-text #thing {
+    font-weight: bold;
+    font-family: Product Sans;
+
+}
+
+#search-menu-container #search-menu-results {
+    height: fit-content;
+    width: 100%;
+    margin-top: 10px;
+    font-family: Product Sans;
+
+}
+
+#search-menu-container #search-menu-results #searching-status-text {
+    margin: 0px 0 10px 10px;
+    font-family: Product Sans;
+
+}
+
+#search-menu-container #search-menu-results #searching-status-text #thing {
+    font-weight: bold;
+    font-family: Product Sans;
+
+}  
+#search-menu-container #loading-container {
+    width: fit-content;
+    float: right;
+}
+#search-menu-container #loading-icon {
+    height: 20px;
+}
+
+#search-menu-container #search-menu-results #no-result-placeholder {
+    margin: 0 0 10px 10px;
+    font-family: Product Sans;
+
+}
+
+div .ripple {
+    transform: scale(0);
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.7);
+    position: absolute;
+    animation: ripple 0.6s linear;
+  }
+  
+  @keyframes ripple {
+    to {
+      transform: scale(2.5);
+      opacity: 0;
+    }
+  }
+
+.ui-button {
+      overflow: hidden; 
+      width: 100%;
+      height: 40px; 
+      padding: 0;
+      color: white;
+      outline: none;
+      position: relative;
+      background-color: transparent;
+      border-style: none;
+    font-size: 20px;
+    text-align: left;
+  }
+
+  .ui-button p {
+      vertical-align: top;
+      line-height: 40px;
+      display: inline-block;
+      margin: 0;
+    font-family: Product Sans;
+
+  }
+
+  .ui-button i {
+      vertical-align: top;
+      font-size: 30px;
+      display: inline-block;
+      line-height: 40px;
+      margin-left: 5px;
+  }
+
+  .ui-button p {
+      margin-left: 5px;
+  }
+
+  #sidebar-content {
+      height: 100%;
+      width: 100%;
+      transform: translateY(-100%);
+      position: relative;
+      z-index: 3;
+  }
+
+
+#sidebar-content {
+    margin-top: 90px;
+}
+
+#content #calendar-container {
+    height: 100%;
+    width: 100%;
+    grid-area: 2 / 2 / 2 / span 2;
+    display: grid;
+    background-color: white;
+    grid-template-columns: repeat(5, 20%);
+    grid-template-rows: repeat(7, 14.28%);
+}
+
+#content #calendar-container #calendar-item {
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+    font-family: Product Sans;
+    overflow: hidden;
+}
+
+
+#content #calendar-container #calendar-item .calendar-item-number {
+    font-size: 20px;
+    margin-bottom: 0;
+    width: fit-content;
+transform: translateX(5px);
+    position: absolute;
+    color: rgb(150,150,150);
+    margin: 0;
+    width: 100%;
+    line-height: 30px;
+}
+
+#content #calendar-container #calendar-item .calendar-item-number-background {
+    background-color: white;
+    height: 23px;
+    width: 80%;
+    border-style: solid;
+    border-color: rgb(200,200,200);    
+    border-width: 0 0 1px;
+    text-align: left;
+    position: relative;
+    opacity: 0.8
+}
+
+#reminder {
+    height: 20px;
+    width: 80%;
+    background-color: rgb(63,81,181);
+    color: white;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 2px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+}
+
+#reminder:hover {
+    cursor: pointer;
+}
+
+#reminder #reminder-title {
+    margin: 0;
+    margin-left: 5px;
+    display: inline-block;
+    vertical-align: top;
+    line-height: 20px;
+    width: 100%;
+    
+    
+}
+
+#reminder #reminder-icon {
+    height: 100%;
+    width: auto;
+    display: inline-block;
+}
+
+#sidebar-content #sidebar-calendar {
+    height: 200px;
+    width: fit-content;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    background-color: transparent;
+    position: absolute;
+    bottom: 20%;
+    display: grid;
+    grid-template-columns: repeat(8, 25px);
+    grid-template-rows: repeat(8, 25px);
+}
+
+#sidebar-content #sidebar-calendar #day {
+    color: white;
+    font-family: Product Sans;
+    text-align: center;
+    background-color: rgba(100,100,100, 0.5); 
+}
+
+#sidebar-content #sidebar-calendar #day p {
+    margin: 0;
+    line-height: 25px;
+    width: 100%;
+}
+
+#sidebar-content #sidebar-calendar #week {
+    color: white;
+    font-family: Product Sans;
+    text-align: center;
+}
+
+#sidebar-content #sidebar-calendar .sidebar-calendar-day {
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+    text-align: center;
+    line-height: 25px;
+    border-radius: 100%;
+    color: rgb(200,200,200);
+    transition: all 150ms ease-in-out;
+}
+
+#sidebar-content #sidebar-calendar .sidebar-calendar-day:hover {
+    background-color: rgba(200,200,200, 0.5);
+    cursor: pointer;
+}
+
+#sidebar-content #sidebar-calendar .switch-month {
+    text-align: center;
+    line-height: 25px;
+    color: rgb(50,50,50);
+    transition: all 150ms ease-in-out;
+    border-radius: 40px;
+    width: 100%;
+    height: 100%;
+}
+
+#sidebar-content #sidebar-calendar .switch-month i {
+    line-height: 25px;
+    width: 100%;
+}
+
+#sidebar-content #sidebar-calendar .switch-month:hover {
+    background-color: rgba(200,200,200, 0.5);
+    cursor: pointer;
+}
+
+#sidebar-content #sidebar-calendar #week {
+    background-color: rgba(100,100,100, 0.5);
+}
+
+#sidebar-content #sidebar-calendar #week p {
+    margin: 0;
+    line-height: 25px;
+    width: 100%;
+}
+
+#preview-calendar-item {
+    height: fit-content;
+    min-height: 100px;
+    width: 200px;
+    background-color: white;
+    border-radius: 5px;
+    position: absolute;
+    top: 0;
+    box-shadow: 0px 7px 17px -3px rgba(0, 0, 0, 0.43);
+    animation: fade-in-preview 200ms ease-in-out;
+    overflow: hidden;
+}
+
+@keyframes fade-in-preview {
+    0% {transform: translateY(10px); opacity: 0;}
+    100% {transform: translateY(0); opacity: 1;}
+}
+
+#preview-calendar-item #calendar-item-preview-header {
+height: fit-content;
+min-height: 50px;
+width: 100%;
+background-color: rgb(63,81,181);
+border-top-left-radius: 5px;
+border-top-right-radius: 5px;
+box-shadow: 0px -2px 17px 0px rgba(0, 0, 0, 0.75);
+}
+
+#preview-calendar-item #calendar-item-preview-header h3 {
+    color: white;
+    line-height: auto;
+    transform: translateY(14px);
+    margin-left: 10px;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-weight:lighter;
+    pointer-events: none;
+    position: relative;
+    margin-bottom: 27px;
+}
+
+#preview-calendar-item p {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+
+#event-creator {
+    position: absolute;
+    background-color: white;
+    height: 100%;
+    width: 400px;
+    animation: enter-event-creator 300ms ease-in-out;
+    -webkit-box-shadow: -12px 0px 39px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: -12px 0px 39px 0px rgba(0,0,0,0.75);
+box-shadow: -12px 0px 39px 0px rgba(0,0,0,0.75);
+}
+
+#event-creator #title {
+    width: 100%;
+    text-align: center;
+    font-weight: lighter;
+    color: rgb(100,100,100);
+}
+
+@keyframes enter-event-creator {
+    0% {
+        transform: translateX(-400px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes out-event-creator {
+    0% {
+        transform: translateX(0px);
+    }
+    100% {
+        transform: translateX(-400px);
+    }
+}
