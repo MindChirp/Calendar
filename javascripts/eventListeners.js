@@ -1,4 +1,4 @@
-window.addEventListener('click', function(e){   
+window.addEventListener('mousedown', function(e){   
     setTimeout(function() {
         if(document.getElementById("search-menu-container")) {
 
@@ -12,6 +12,7 @@ window.addEventListener('click', function(e){
             //Searchbar
             document.getElementById("search-box-main").value = document.getElementById("search-box-secondary").value;
             cont.parentNode.removeChild(cont);
+            console.log("Removing")
         }
     }
     if(document.getElementById("preview-calendar-item")) {
@@ -29,7 +30,7 @@ window.addEventListener('click', function(e){
                         }
     }
 
-    })
+    });
     });
 
 

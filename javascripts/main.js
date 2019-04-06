@@ -158,12 +158,10 @@ for(var i = 0; i < indexedEv.length; i++) {
 }
 
 function createSearchMenu() {
-    setTimeout(function() {
     var cont = document.createElement("div");
     cont.setAttribute("id", "search-menu-container");
-    document.getElementById("header").appendChild(cont);
-
-
+    
+    
     var resultCont = document.createElement("div");
     resultCont.setAttribute("id", "search-menu-results");
     
@@ -176,11 +174,14 @@ function createSearchMenu() {
     input.setAttribute("oninput", "checkForQuery(this.value)");
     cont.appendChild(input);
     
+    setTimeout(function() {
         
-        input.value = document.getElementById("search-box-main").value;
-        input.focus();
+        document.getElementById("header").appendChild(cont);
+    input.value = document.getElementById("search-box-main").value;
+    layout.wideDivider(document.getElementById("search-menu-container"), "content-from-search-bar-divider");
+    input.focus();
+}, 10);
         
-        layout.wideDivider(document.getElementById("search-menu-container"), "content-from-search-bar-divider");
         
         var loadingCont = document.createElement("div");
         loadingCont.setAttribute("id", "loading-container");
@@ -211,7 +212,6 @@ function createSearchMenu() {
             txt.appendChild(span);
         }
         
-    }, 50);
 
 
 }
