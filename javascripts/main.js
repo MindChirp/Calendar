@@ -62,28 +62,87 @@ if(leftOverDaysInFirstRow != 0) {
     for(var i = 0; i < leftOverDaysInFirstRow; i++) {
         var day = document.createElement("div");
         day.setAttribute("class", "sidebar-calendar-day");
-        day.innerHTML = daysInPrevMonth - leftOverDaysInFirstRow + 1 + i;
+        var p = document.createElement("p");
+        p.innerHTML = daysInPrevMonth - leftOverDaysInFirstRow + 1 + i;
+        day.appendChild(p);
+        day.setAttribute("onmouseenter", "highlightDay(this, true)");
+        day.setAttribute("onmouseleave", "highlightDay(this, false)");
+
         document.getElementById("sidebar-calendar").appendChild(day);
     }
 }
 
+
+
 //Append the days in the current month
-    for(var i = 0; i < 42 - leftOverDaysInFirstRow; i++) {
+var columnOfCurrentDay;
+    for(var i = 0; i < 35 - leftOverDaysInFirstRow; i++) {
+console.log("ASD")
         var day = document.createElement("div");
         day.setAttribute("class", "sidebar-calendar-day");
         day.setAttribute("style", "color: white");
-        day.innerHTML = i + 1;
-
+        var p = document.createElement("p");
+        p.innerHTML = i + 1;
+        day.appendChild(p);
+day.setAttribute("onmouseenter", "highlightDay(this, true)");
+day.setAttribute("onmouseleave", "highlightDay(this, false)");
         //Highlight the current day
         if(i + 1 == date.getDate()) {
-            day.style.backgroundColor = "rgba(150,150,150, 0.9)";
+            var i1 = i; 
+            day.childNodes[0].style.backgroundColor = "rgba(150,150,150, 0.9)";
+            day.setAttribute("name", "current-day");
+
+            //Set the week number for the current day, and then follow it up with
+            //the rest of the columns
+
+            columnOfCurrentDay = Math.round(i1 / 6);
+            var newDate = new Date();
+            var weekNo = getWeekNumber(newDate);
+            var weekNums = document.getElementsByClassName("week");
+
+            weekNums[columnOfCurrentDay - 1].childNodes[0].innerHTML = weekNo[1] + 1;
+
+
+            //Append for all the following weeks
+            //I am using columnOfCurrentDay because it is one value higher than
+            //the value of the actual column
+for(var m = columnOfCurrentDay; m < weekNums.length; m++) {
+    weekNums[m].childNodes[0].innerHTML = weekNo[1] + 1 + m;
+}
+
+            //Append for all the earlier weeks
+for(var m = 0; m < columnOfCurrentDay; m++) {
+    weekNums[m].childNodes[0].innerHTML = weekNo[1] + 1 + m;
+}
+
+
         }
+
+
+
         if(i == daysInMonth(date.getMonth() + 1, date.getFullYear())) {
             break;
         }
         document.getElementById("sidebar-calendar").appendChild(day);
     }
 
+//Append the remaining days in the mini-calendar
+var daysSoFarInMiniCalendar = document.getElementsByClassName("sidebar-calendar-day");
+for(var o = 0; o < 39 - daysSoFarInMiniCalendar.length; o++) {
+    var day = document.createElement("div");
+    day.setAttribute("class", "sidebar-calendar-day");
+    day.setAttribute("style", "color: white");
+    var p = document.createElement("p");
+    p.setAttribute("style", "color: rgb(200,200,200);");
+    p.innerHTML = o + 1;
+    day.appendChild(p);
+    console.log(o);
+day.setAttribute("onmouseenter", "highlightDay(this, true)");
+day.setAttribute("onmouseleave", "highlightDay(this, false)");
+document.getElementById("sidebar-calendar").appendChild(day);
+
+}
+//Set the correct week numbers
 
 
 
@@ -177,43 +236,43 @@ function createSearchMenu() {
     setTimeout(function() {
         
         document.getElementById("header").appendChild(cont);
+        layout.wideDivider(document.getElementById("search-menu-container"), "content-from-search-bar-divider");
     input.value = document.getElementById("search-box-main").value;
-    layout.wideDivider(document.getElementById("search-menu-container"), "content-from-search-bar-divider");
     input.focus();
+    
+    
+    var loadingCont = document.createElement("div");
+    loadingCont.setAttribute("id", "loading-container");
+    
+    cont.appendChild(loadingCont);
+    
+    //<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+    
+    var loader = document.createElement("div");
+    loader.setAttribute("class", "lds-ellipsis");
+    loader.setAttribute("id", "loading-icon");
+    loader.style.display = "none";
+    loadingCont.appendChild(loader);
+    for(var i = 0; i < 4; i++) {
+        var div = document.createElement("div");
+        loader.appendChild(div);
+    }
+    cont.appendChild(resultCont);
+    if(input.value == "") {
+        var txt = document.createElement("p");
+        txt.setAttribute("id", "suggestion-text");
+        txt.innerHTML = "Try searching for ";
+        
+        var span = document.createElement("span");
+        span.setAttribute("id", "thing");
+        span.innerHTML = things[Math.round(Math.random() * 100 * (things.length - 1) / 100)];
+        resultCont.appendChild(txt);
+        txt.appendChild(span);
+    }
+    
+    
+    
 }, 10);
-        
-        
-        var loadingCont = document.createElement("div");
-        loadingCont.setAttribute("id", "loading-container");
-        
-        cont.appendChild(loadingCont);
-        
-        //<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
-        
-        var loader = document.createElement("div");
-        loader.setAttribute("class", "lds-ellipsis");
-        loader.setAttribute("id", "loading-icon");
-        loader.style.display = "none";
-        loadingCont.appendChild(loader);
-        for(var i = 0; i < 4; i++) {
-            var div = document.createElement("div");
-            loader.appendChild(div);
-        }
-        cont.appendChild(resultCont);
-        if(input.value == "") {
-            var txt = document.createElement("p");
-            txt.setAttribute("id", "suggestion-text");
-            txt.innerHTML = "Try searching for ";
-            
-            var span = document.createElement("span");
-            span.setAttribute("id", "thing");
-            span.innerHTML = things[Math.round(Math.random() * 100 * (things.length - 1) / 100)];
-            resultCont.appendChild(txt);
-            txt.appendChild(span);
-        }
-        
-
-
 }
 
 
@@ -286,3 +345,15 @@ function search(qry) {
 
 
 
+
+
+function highlightDay(el, bool) {
+    if(el.getAttribute("name") != "current-day") {
+        
+        if(bool == true) {
+            el.childNodes[0].style.backgroundColor = "rgba(200,200,200,0.5)";
+        } else {
+            el.childNodes[0].style.backgroundColor = "rgba(200,200,200,0.0)";
+        }
+    }
+}
