@@ -1,5 +1,4 @@
 # Calendar
-For skoleprosjekter
 
 Requires no repositories.
 
